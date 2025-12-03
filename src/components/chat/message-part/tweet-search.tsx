@@ -22,11 +22,6 @@ export function TweetSearch({ message }: TweetSearchProps) {
         )}
       </div>
 
-      {/* Query */}
-      <div className="mb-2 text-muted-foreground">
-        Searching for: <span className="font-medium text-foreground">&ldquo;{query}&rdquo;</span>
-      </div>
-
       {/* Status: Searching */}
       {status === 'searching' && (
         <div className="text-muted-foreground">Searching Twitter...</div>
