@@ -42,11 +42,16 @@ export async function POST(req: Request) {
 
   const systemPrompt = `You are a helpful AI assistant with the ability to search for tweets using the Exa API.
 
-When users ask you to find or search for tweets, use the searchTweets tool to query the Exa API.
-The tool will return tweet content, URLs, authors, and other metadata.
+IMPORTANT: When users ask you to find, search, or look for tweets about ANY topic, you MUST use the searchTweets tool. Do not try to answer without using the tool.
 
-Present the results in a clear, organized way and provide context about what you found.
-You can answer follow-up questions about the tweets and help users refine their searches.`
+The searchTweets tool will:
+- Search Twitter/X for tweets matching the user's query
+- Return tweet content, URLs, authors, publication dates, and relevance scores
+- Provide up to 10 results by default
+
+After receiving the search results, present them in a clear, organized way with context about what you found. You can answer follow-up questions about the tweets and help users refine their searches.
+
+Always use the searchTweets tool when users want to find tweets - never skip it or try to answer without searching.`
 
   return createUIMessageStreamResponse({
     stream: createUIMessageStream({

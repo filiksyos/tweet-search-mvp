@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { SendIcon } from 'lucide-react'
+import { useState } from 'react'
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void
@@ -16,25 +16,30 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (input.trim() && !disabled) {
-      onSendMessage(input)
+      onSendMessage(input.trim())
       setInput('')
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border-t bg-card">
-      <div className="flex gap-2">
-        <Input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask me to search for tweets..."
-          disabled={disabled}
-          className="flex-1"
-        />
-        <Button type="submit" disabled={disabled || !input.trim()}>
-          <SendIcon className="w-4 h-4" />
-        </Button>
-      </div>
+    <form
+      className="flex items-center p-4 space-x-2 border-t bg-background"
+      onSubmit={handleSubmit}
+    >
+      <Input
+        className="flex-1"
+        disabled={disabled}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Type your message..."
+        value={input}
+      />
+      <Button 
+        type="submit" 
+        disabled={disabled || !input.trim()}
+        size="icon"
+      >
+        <SendIcon className="w-4 h-4" />
+      </Button>
     </form>
   )
 }

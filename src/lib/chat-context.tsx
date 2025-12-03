@@ -4,15 +4,22 @@ import { type ReactNode, useState } from 'react'
 import { Chat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { createContext, useContext, useMemo } from 'react'
+import type { DataPart } from '@/ai/messages/data-parts'
 
 export interface ChatUIMessage {
   id: string
   role: 'user' | 'assistant'
   text: string
-  parts: Array<{
-    type: 'text'
-    text: string
-  }>
+  parts: Array<
+    | {
+        type: 'text'
+        text: string
+      }
+    | {
+        type: 'data-tweet-search'
+        data: DataPart['tweet-search']
+      }
+  >
 }
 
 interface ChatContextValue {
