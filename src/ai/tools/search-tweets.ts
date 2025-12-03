@@ -1,15 +1,15 @@
-import { tool } from 'ai'
-import { z } from 'zod'
-import Exa from 'exa-js'
-import type { UIMessage, UIMessageStreamWriter } from 'ai'
+import type { UIMessageStreamWriter, UIMessage } from 'ai'
 import type { DataPart } from '../messages/data-parts'
+import { tool } from 'ai'
+import z from 'zod'
+import Exa from 'exa-js'
 
 interface Params {
   writer: UIMessageStreamWriter<UIMessage<never, DataPart>>
 }
 
-export function searchTweets({ writer }: Params) {
-  return tool({
+export const searchTweets = ({ writer }: Params) =>
+  tool({
     description: 'Search for tweets using the Exa API. Use this when users ask to find or search for tweets about specific topics. Always use this tool when users want to find tweets.',
     inputSchema: z.object({
       query: z.string().describe('The search query for finding tweets'),
@@ -108,4 +108,3 @@ Please try again with a different query.`
       }
     },
   })
-}
